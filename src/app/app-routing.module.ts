@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   {
@@ -9,7 +9,6 @@ const routes: Routes = [
     loadComponent: () =>
       import('./tab1/tab1.page').then((m) => m.Tab1Page),
   },
-
   {
     path: 'add-streak',
     loadComponent: () =>
@@ -20,9 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

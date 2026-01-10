@@ -1,6 +1,18 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { RouteReuseStrategy, provideRouter } from '@angular/router';
+import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 
-import { AppModule } from './app/app.module';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+import { routes } from './app/app-routing.module';
+import { AppComponent } from './app/app.component';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideIonicAngular(),
+    importProvidersFrom(IonicStorageModule.forRoot()),
+    provideRouter(routes),
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  ],
+});
