@@ -19,7 +19,27 @@
 <ion-content class="ion-padding">
   <ion-list *ngIf="streaks.length > 0">
     <ion-item *ngFor="let s of streaks">
-      <ion-label>{{ s.name }}</ion-label>
+      <ion-label>
+        <div style="display:flex; justify-content:space-between; align-items:baseline;">
+          <strong>{{ s.name }}</strong>
+          <span style="opacity:.7; font-size: 12px;">
+            max: {{ s.maxStreak }}
+          </span>
+        </div>
+
+        <div style="margin-top:6px; opacity:.9;">
+          current: {{ currentDays(s) }} dní
+        </div>
+      </ion-label>
+
+      <ion-button
+        slot="end"
+        color="danger"
+        fill="outline"
+        (click)="reset(s)"
+      >
+        Reset
+      </ion-button>
     </ion-item>
   </ion-list>
 
