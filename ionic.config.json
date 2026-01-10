@@ -1,0 +1,7 @@
+{
+  "name": "streaky",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
