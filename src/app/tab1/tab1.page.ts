@@ -20,11 +20,22 @@ export class Tab1Page {
   formattedDate = this.formatDateFromYmd(this.selectedDate);
   streaks: Streak[] = [];
 
+  quote: string | null = null;
+
   constructor(
     private streaksSvc: StreaksService,
     private alertCtrl: AlertController
   ) {}
 
+  async loadQuote() {
+    try {
+      const res = await fetch('https://api.adviceslip.com/advice');
+      const data = await res.json();
+      this.quote = data?.slip?.advice ?? null;
+    } catch {
+      this.quote = null;
+    }
+  }
 
   async ionViewWillEnter() {
     this.today = todayYmd();
@@ -34,6 +45,7 @@ export class Tab1Page {
     }
 
     this.streaks = await this.streaksSvc.getAll();
+    this.loadQuote();
   }
 
   private formatDate(date: Date): string {
