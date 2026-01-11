@@ -69,4 +69,11 @@ export class StreaksService {
     streaks[idx] = updated;
     await this.storage.set(KEY, streaks);
   }
+
+  async remove(id: number): Promise<void> {
+    await this.ensureReady();
+    const streaks = (await this.storage.get(KEY)) ?? [];
+    const filtered = streaks.filter((s: any) => s.id !== id);
+    await this.storage.set(KEY, filtered);
+  }
 }

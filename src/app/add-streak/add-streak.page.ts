@@ -1,18 +1,8 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import {
-  IonBackButton,
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 
 import { StreaksService } from '../streaks.service';
 
@@ -21,20 +11,7 @@ import { StreaksService } from '../streaks.service';
   templateUrl: './add-streak.page.html',
   styleUrls: ['./add-streak.page.scss'],
   standalone: true,
-  imports: [
-    RouterModule,
-    FormsModule,
-    IonHeader,
-    IonToolbar,
-    IonButtons,
-    IonBackButton,
-    IonTitle,
-    IonContent,
-    IonItem,
-    IonLabel,
-    IonInput,
-    IonButton,
-  ],
+  imports: [CommonModule, FormsModule, RouterModule, IonicModule],
 })
 export class AddStreakPage {
   name = '';
@@ -44,6 +21,7 @@ export class AddStreakPage {
   async save() {
     const trimmed = this.name.trim();
     if (!trimmed) return;
+
     await this.streaks.add(trimmed);
     await this.router.navigateByUrl('/home');
   }

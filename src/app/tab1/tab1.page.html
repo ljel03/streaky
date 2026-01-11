@@ -1,16 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <div style="display:flex; align-items:center; justify-content:space-between; width:100%;">
-      <ion-button fill="clear" disabled>
-        <ion-icon name="chevron-back-outline"></ion-icon>
+      <ion-button fill="clear" (click)="goBack()" [disabled]="!canGoBack()">
+        <ion-icon
+          name="chevron-back-outline"
+          style="color: white;"
+        ></ion-icon>
       </ion-button>
 
       <ion-title style="text-align:center;">
         {{ formattedDate }}
       </ion-title>
 
-      <ion-button fill="clear" disabled>
-        <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-button fill="clear" (click)="goForward()">
+        <ion-icon
+          name="chevron-forward-outline"
+          style="color: white;"
+        ></ion-icon>
       </ion-button>
     </div>
   </ion-toolbar>
@@ -34,11 +40,23 @@
 
       <ion-button
         slot="end"
-        color="danger"
-        fill="outline"
-        (click)="reset(s)"
+        fill="clear"
+        (click)="confirmReset(s)"
+        title="Reset streak"
       >
-        Reset
+        <ion-icon
+          name="reload-outline"
+          style="color: #ff4d4d; font-size: 22px;"
+        ></ion-icon>
+      </ion-button>
+
+      <ion-button
+        slot="end"
+        color="danger"
+        fill="clear"
+        (click)="confirmDelete(s)"
+      >
+        <ion-icon name="trash-outline"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-list>
@@ -49,7 +67,10 @@
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="primary" routerLink="/add-streak">
-      <ion-icon name="add" style="color: white;"></ion-icon>
+      <ion-icon
+        name="add"
+        style="color: white; font-size: 28px;"
+      ></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
